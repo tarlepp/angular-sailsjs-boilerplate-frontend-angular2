@@ -1,0 +1,27 @@
+<header>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="/" class="navbar-brand">Boilerplate</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <!--
+            [ng-class]="isActive(item) ? 'active' : 'not-active'"
+            <a [router-link]="[item.link]">{{item.title}}</a>
+            -->
+
+            <ul class="nav navbar-nav">
+                <li *ng-for="#item of items.getNavigation()"
+                    [ng-class]="isActive(item) ? 'active' : 'not-active'"
+                >
+                    <a [router-link]="[getRouterLink(item)]">{{item.data.title}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
