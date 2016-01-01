@@ -8,6 +8,7 @@ let resolve = require.resolve;
 export const ENV              = argv['env']         || 'dev';
 export const DEBUG            = argv['debug']       || false;
 
+export const BACKEND_URL      = argv['backend-url'] || 'localhost:1337';
 export const PORT             = argv['port']        || 5555;
 export const LIVE_RELOAD_PORT = argv['reload-port'] || 4002;
 export const DOCS_PORT        = argv['docs-port']   || 4003;
