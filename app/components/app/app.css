@@ -13,3 +13,27 @@ body {
 
 header .navbar-nav {
   float: none; }
+
+footer .navbar {
+  max-height: 25px;
+  min-height: 25px;
+  text-align: center; }
+  footer .navbar .navbar-nav {
+    float: none; }
+    footer .navbar .navbar-nav > li {
+      display: inline-block;
+      float: none; }
+      footer .navbar .navbar-nav > li > a {
+        font-size: 11px;
+        line-height: 25px;
+        padding: 0 10px; }
+        footer .navbar .navbar-nav > li > a .fa {
+          color: #999;
+          font-size: 14px;
+          margin-right: 3px;
+          position: relative;
+          top: 1px; }
+        footer .navbar .navbar-nav > li > a:hover {
+          color: #3399f3; }
+          footer .navbar .navbar-nav > li > a:hover .fa {
+            color: #337bd5; }

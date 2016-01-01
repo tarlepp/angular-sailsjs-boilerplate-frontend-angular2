@@ -3,13 +3,13 @@ import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {RouteItem} from '../../services/route_item';
 
 @Component({
-  selector: 'navigation',
-  templateUrl: './components/navigation/navigation.html',
+  selector: 'header-component',
+  templateUrl: './components/layout/header.html',
   directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES],
   providers: [RouteItem]
 })
 
-export class NavigationCmp {
+export class HeaderCmp {
   constructor(
     public items: RouteItem,
     private _router: Router

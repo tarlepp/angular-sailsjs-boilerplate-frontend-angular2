@@ -41,7 +41,7 @@ export class RouteItem {
 
   getNavigation(): any[] {
     return this.items.filter(item => {
-      return item.hasOwnProperty('data');
+      return item.hasOwnProperty('data') && item.data.hasOwnProperty('title');
     });
   }
 }

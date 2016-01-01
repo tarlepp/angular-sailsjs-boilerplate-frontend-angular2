@@ -1,3 +1,9 @@
+$color-footer-text: #999;
+$color-footer-hover-text: #3399f3;
+$color-footer-hover-icons: #337bd5;
+$color-tooltip-title: #fff;
+$color-tooltip-title-border: #9b9b9b;
+
 body {
   cursor: default;
   font-family: 'PT Sans', sans-serif;
@@ -16,4 +22,43 @@ body {
 
 header .navbar-nav {
   float: none;
+}
+
+footer {
+  .navbar {
+    max-height: 25px;
+    min-height: 25px;
+    text-align: center;
+
+    .navbar-nav {
+      float: none;
+
+      > li {
+        display: inline-block;
+        float: none;
+
+        > a {
+          font-size: 11px;
+          line-height: 25px;
+          padding: 0 10px;
+
+          .fa {
+            color: $color-footer-text;
+            font-size: 14px;
+            margin-right: 3px;
+            position: relative;
+            top: 1px;
+          }
+
+          &:hover {
+            color: $color-footer-hover-text;
+
+            .fa {
+              color: $color-footer-hover-icons;
+            }
+          }
+        }
+      }
+    }
+  }
 }
