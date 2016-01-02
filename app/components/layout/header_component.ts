@@ -1,4 +1,5 @@
-import {Component, CORE_DIRECTIVES} from 'angular2/angular2';
+import {Component} from 'angular2/core';
+import {CORE_DIRECTIVES} from 'angular2/common';
 import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {RouteItem} from '../../services/route_item';
 
@@ -10,10 +11,14 @@ import {RouteItem} from '../../services/route_item';
 })
 
 export class HeaderCmp {
+  items: any[];
+
   constructor(
-    public items: RouteItem,
+    private _routerItem: RouteItem,
     private _router: Router
-  ) {}
+  ) {
+    this.items = _routerItem.getNavigation();
+  }
 
   getRouterLink(item): string {
     return '/' + item.as;

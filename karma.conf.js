@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Wed Jul 15 2015 09:44:02 GMT+0200 (Romance Daylight Time)
+'use strict';
 
 module.exports = function(config) {
   config.set({
@@ -20,11 +21,12 @@ module.exports = function(config) {
       'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/es6-module-loader/dist/es6-module-loader.js',
       'node_modules/traceur/bin/traceur-runtime.js', // Required by PhantomJS2, otherwise it shouts ReferenceError: Can't find variable: require
+      'node_modules/traceur/bin/traceur.js',
       'node_modules/systemjs/dist/system.src.js',
       'node_modules/reflect-metadata/Reflect.js',
 
       { pattern: 'node_modules/angular2/**/*.js', included: false, watched: false },
-      { pattern: 'node_modules/@reactivex/rxjs/dist/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
       { pattern: 'test/**/*.js', included: false, watched: true },
       { pattern: 'node_modules/systemjs/dist/system-polyfills.js', included: false, watched: false }, // PhantomJS2 (and possibly others) might require it
 
@@ -34,6 +36,7 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
+      'node_modules/angular2/**/*_spec.js'
     ],
 
 
@@ -87,7 +90,13 @@ module.exports = function(config) {
     singleRun: false
   });
 
-  if (process.env.TRAVIS) {
+  if (process.env.APPVEYOR) {
+    config.browsers = ['IE'];
+    config.singleRun = true;
+    config.browserNoActivityTimeout = 90000; // Note: default value (10000) is not enough
+  }
+
+  if (process.env.TRAVIS || process.env.CIRCLECI) {
     config.browsers = ['Chrome_travis_ci'];
     config.singleRun = true;
   }

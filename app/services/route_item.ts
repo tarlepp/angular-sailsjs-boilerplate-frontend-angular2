@@ -3,7 +3,7 @@ import {AboutCmp} from '../components/about/about';
 export class RouteItem {
   items = [
     {
-      path: '/',
+      path: './',
       redirectTo: '/about'
     },
     {
