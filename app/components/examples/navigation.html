@@ -1,0 +1,18 @@
+<ul class="nav nav-tabs">
+    <li [ngClass]="isActive('/examples/book') ? 'active' : 'not-active'">
+        <a [routerLink]="['/Examples/Book']">Books</a>
+    </li>
+
+    <li [ngClass]="isActive('/examples/author') ? 'active' : 'not-active'">
+        <a [routerLink]="['/Examples/Author']">Authors</a>
+    </li>
+
+    <li class="pull-right">
+        <a href="#" class="help"
+           data-ng-click="openInformation()"
+        >
+            More information about this GUI
+            <i class="fa fa-info-circle"></i>
+        </a>
+    </li>
+</ul>
