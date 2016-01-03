@@ -1,32 +1,21 @@
 import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
-import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
-import {RouteItem} from '../../services/route_item';
+import {ROUTER_DIRECTIVES, Location} from 'angular2/router';
 
 @Component({
   selector: 'header-component',
   templateUrl: './components/layout/header.html',
-  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES],
-  providers: [RouteItem]
+  directives: [CORE_DIRECTIVES, ROUTER_DIRECTIVES]
 })
 
 export class HeaderCmp {
-  items: any[];
-
   constructor(
-    private _routerItem: RouteItem,
-    private _router: Router
-  ) {
-    this.items = _routerItem.getNavigation();
-  }
-
-  getRouterLink(item): string {
-    return '/' + item.as;
-  }
+    private _location: Location
+  ) {}
 
   isActive(item): boolean {
-    let instruction = this._router.generate([this.getRouterLink(item)]);
+    let regExp = new RegExp(item, 'gi');
 
-    return this._router.isRouteActive(instruction);
+    return !!this._location.path().match(regExp);
   }
 }

@@ -1,4 +1,5 @@
 import {AboutCmp} from '../components/about/about';
+import {ExamplesCmp} from '../components/examples/examples';
 
 export class RouteItem {
   items = [
@@ -16,12 +17,12 @@ export class RouteItem {
       }
     },
     {
-      path: '/examples',
-      component: AboutCmp,
+      path: '/examples/...',
+      component: ExamplesCmp,
       as: 'Examples',
       data: {
         access: 'user',
-        title: 'Examples'
+        title_: 'Examples'
       }
     },
     {
