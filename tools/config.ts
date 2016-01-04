@@ -2,7 +2,6 @@ import {readFileSync} from 'fs';
 import {argv} from 'yargs';
 import {normalize, join} from 'path';
 
-
 // --------------
 // Configuration.
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
@@ -12,6 +11,8 @@ export const PORT                 = argv['port']        || 5555;
 export const LIVE_RELOAD_PORT     = argv['reload-port'] || 4002;
 export const DOCS_PORT            = argv['docs-port']   || 4003;
 export const APP_BASE             = argv['base']        || '/';
+
+export const BACKEND_URL          = argv['backend-url'] || 'http://10.1.1.177:1339';
 
 export const ENABLE_HOT_LOADING   = !!argv['hot-loader'];
 export const HOT_LOADER_PORT      = 5578;
@@ -53,6 +54,9 @@ export const NPM_DEPENDENCIES = [
   { src: 'angular2/bundles/angular2.min.js', inject: 'libs', dest: LIB_DEST },
   { src: 'angular2/bundles/router.js', inject: 'libs', dest: LIB_DEST }, // use router.min.js with alpha47
   { src: 'angular2/bundles/http.min.js', inject: 'libs', dest: LIB_DEST },
+
+  // 3rd party libraries
+  { src: 'angular2-jwt/angular2-jwt.js', inject: 'libs', dest: LIB_DEST },
 
   { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true, dest: CSS_DEST }
 ];
@@ -98,7 +102,6 @@ export const SYSTEM_CONFIG_BUILDER = {
     'rxjs/*': 'node_modules/rxjs/*'
   }
 };
-
 
 // --------------
 // Private.
