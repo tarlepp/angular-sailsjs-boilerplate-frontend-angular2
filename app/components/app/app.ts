@@ -5,13 +5,11 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 // Component specified stuff
 import {HeaderCmp, FooterCmp} from '../layout/layout';
-import {NameList} from '../../services/name_list';
 import {Routes} from './routes';
 
 // Component setup
 @Component({
   selector: 'app',
-  viewProviders: [NameList],
   templateUrl: './components/app/app.html',
   styleUrls: ['./components/app/app.css'],
   encapsulation: ViewEncapsulation.None,
