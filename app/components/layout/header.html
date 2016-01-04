@@ -15,12 +15,23 @@
                     <a [routerLink]="['/About']">About</a>
                 </li>
 
-                <li [ngClass]="isActive('/examples') ? 'active' : 'not-active'">
+                <li [ngClass]="isActive('/examples') ? 'active' : 'not-active'"
+                    *ngIf="authorized()"
+                >
                     <a [routerLink]="['/Examples/Book']">Examples</a>
                 </li>
 
-                <li [ngClass]="isActive('/admin') ? 'active' : 'not-active'">
-                    <a [routerLink]="['/Admin']">Admin</a>
+                <li class="pull-right"
+                    [ngClass]="isActive('/login') ? 'active' : 'not-active'"
+                    *ngIf="!authorized()"
+                >
+                    <a [routerLink]="['/Login']">Login</a>
+                </li>
+
+                <li class="pull-right"
+                    *ngIf="authorized()"
+                >
+                    <a href="#" (click)="logout($event)">Logout</a>
                 </li>
             </ul>
         </div>
