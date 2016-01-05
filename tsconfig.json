@@ -7,9 +7,7 @@
         "removeComments": true,
         "noLib": false,
         "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": true,
-        "outDir": "dev/ts_compiled"
+        "experimentalDecorators": true
     },
     "exclude": [
         "node_modules"
