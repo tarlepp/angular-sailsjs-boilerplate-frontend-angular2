@@ -7,12 +7,12 @@ import {normalize, join} from 'path';
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
 export const ENV                  = argv['env']         || 'dev';
 export const DEBUG                = argv['debug']       || false;
-export const PORT                 = argv['port']        || 5555;
-export const LIVE_RELOAD_PORT     = argv['reload-port'] || 4002;
+export const PORT                 = argv['port']        || 3000;
+export const LIVE_RELOAD_PORT     = argv['reload-port'] || 3001;
 export const DOCS_PORT            = argv['docs-port']   || 4003;
 export const APP_BASE             = argv['base']        || '/';
 
-export const BACKEND_URL          = argv['backend-url'] || 'http://10.1.1.177:1339';
+export const BACKEND_URL          = argv['backend-url'] || 'http://wunder.sytes.net:1339';
 
 export const ENABLE_HOT_LOADING   = !!argv['hot-loader'];
 export const HOT_LOADER_PORT      = 5578;

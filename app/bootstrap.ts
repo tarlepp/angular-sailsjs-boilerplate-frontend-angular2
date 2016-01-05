@@ -13,11 +13,11 @@ import {AppCmp} from './components/app/app';
 // Bootstrap application
 bootstrap(AppCmp, [
   ROUTER_PROVIDERS, HTTP_PROVIDERS,
+  AuthHttp,
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
   provide(AuthConfig, {
     useFactory: () => {
       return new AuthConfig();
     }
-  }),
-  AuthHttp
+  })
 ]);

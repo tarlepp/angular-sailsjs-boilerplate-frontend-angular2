@@ -1,9 +1,12 @@
 // Angular2 specified stuff
-import {Component} from 'angular2/core';
-import {Headers} from 'angular2/http';
+import {Component, Injector, provide} from 'angular2/core';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import {ComponentInstruction, CanActivate, OnActivate} from 'angular2/router';
 
 // 3rd party libraries
-import {AuthHttp} from 'angular2-jwt/angular2-jwt';
+import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
+
+import {BookService} from './service';
 
 // Component setup
 @Component({
@@ -12,24 +15,32 @@ import {AuthHttp} from 'angular2-jwt/angular2-jwt';
   providers: [AuthHttp]
 })
 
+@CanActivate((next) => {
+  var injector = Injector.resolveAndCreate([
+    HTTP_PROVIDERS, BookService, AuthHttp,
+    provide(AuthConfig, {
+      useFactory: () => {
+        return new AuthConfig();
+      }
+    })
+  ]);
+
+  var bookService = injector.get(BookService);
+
+  return bookService.getBooks().then(
+    data => {
+      next.params.books = data;
+
+      return true;
+    }
+  );
+})
+
 // Actual component class
-export class BookCmp {
+export class BookCmp implements OnActivate {
   books: any[];
 
-  private apiUrl = '<%= BACKEND_URL %>';
-
-  constructor(
-    private _authHttp: AuthHttp
-  ) {
-    let headers = new Headers();
-
-    headers.append('Content-Type', 'application/json');
-
-    this._authHttp.get(this.apiUrl + '/book?populate=author', {headers: headers})
-      .subscribe(
-        data => this.books = data.json(),
-        err => console.log(err),
-        () => console.log('Request Complete')
-      );
+  routerOnActivate(nextInstruction: ComponentInstruction, prevInstruction: ComponentInstruction) {
+    this.books = nextInstruction.params.books;
   }
 }
