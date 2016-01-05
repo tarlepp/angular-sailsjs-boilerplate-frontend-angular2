@@ -9,9 +9,15 @@ import {AuthHttp} from 'angular2-jwt/angular2-jwt';
 export class BookService {
   private apiUrl = '<%= BACKEND_URL %>';
 
+  /**
+   * Construction of the class.
+   *
+   * @param _authHttp
+   */
   constructor(private _authHttp: AuthHttp) {}
 
   /**
+   * Getter method for books data.
    *
    * @returns {Promise|Promise<T>}
    */
@@ -24,8 +30,7 @@ export class BookService {
       this._authHttp.get(this.apiUrl + '/book?populate=author', {headers: headers})
         .subscribe(
           data => resolve(data.json()),
-          err => reject(err),
-          () => console.log('Request Complete')
+          error => reject(error)
         );
     });
   }
