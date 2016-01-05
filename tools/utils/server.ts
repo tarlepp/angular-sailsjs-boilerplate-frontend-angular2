@@ -11,9 +11,11 @@ export function serveSPA() {
   codeChangeTool.listen();
   server.use.apply(server, codeChangeTool.middleware);
 
-  server.listen(PORT, () =>
-    openResource('http://localhost:' + PORT + APP_BASE + APP_DEST)
-  );
+  server.listen(PORT, () => {
+    util.log('Server is listening on: http://localhost:' + PORT + APP_BASE + APP_DEST);
+
+    openResource('http://localhost:' + PORT + APP_BASE + APP_DEST);
+  });
 }
 
 export function notifyLiveReload(e) {
