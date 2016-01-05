@@ -5,7 +5,7 @@ import {ROUTER_PROVIDERS, LocationStrategy, HashLocationStrategy} from 'angular2
 import {HTTP_PROVIDERS} from 'angular2/http';
 
 // 3rd party libraries
-import {AuthHttp} from 'angular2-jwt/angular2-jwt';
+import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
 
 // And application itself
 import {AppCmp} from './components/app/app';
@@ -14,7 +14,10 @@ import {AppCmp} from './components/app/app';
 bootstrap(AppCmp, [
   ROUTER_PROVIDERS, HTTP_PROVIDERS,
   provide(LocationStrategy, { useClass: HashLocationStrategy }),
-  provide(AuthHttp, { useFactory: () => {
-    return new AuthHttp();
-  }})
+  provide(AuthConfig, {
+    useFactory: () => {
+      return new AuthConfig();
+    }
+  }),
+  AuthHttp
 ]);
