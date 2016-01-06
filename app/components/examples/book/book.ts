@@ -3,6 +3,9 @@ import {Component, Injector, provide} from 'angular2/core';
 import {HTTP_PROVIDERS} from 'angular2/http';
 import {ComponentInstruction, CanActivate, OnActivate} from 'angular2/router';
 
+// RxJS stuff
+import 'rxjs/add/operator/toPromise';
+
 // 3rd party libraries
 import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
 
@@ -41,20 +44,22 @@ import {BookService} from './service';
   // And get BookService
   let bookService = injector.get(BookService);
 
-  // And fetch books
-  return bookService
-    .getBooks()
-    .then(
-      data => {
-        next.params.books = data;
+  return Promise.all([
+    bookService.count().toPromise(),
+    bookService.getBooks().toPromise()
+  ]).then(
+    data => {
+      next.params.count = data[0];
+      next.params.books = data[1];
 
-        return true;
-      }
-    );
+      return true;
+    }
+  );
 })
 
 // Actual component class
 export class BookCmp implements OnActivate {
+  count: number;
   books: any[];
 
   /**
@@ -64,6 +69,9 @@ export class BookCmp implements OnActivate {
    * @param prevInstruction
    */
   routerOnActivate(nextInstruction: ComponentInstruction, prevInstruction: ComponentInstruction) {
+    //noinspection TypeScriptUnresolvedVariable
+    this.count = nextInstruction.params.count;
+
     //noinspection TypeScriptUnresolvedVariable
     this.books = nextInstruction.params.books;
   }

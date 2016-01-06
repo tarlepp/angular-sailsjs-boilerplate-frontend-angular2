@@ -2,6 +2,9 @@
 import {Headers} from 'angular2/http';
 import {Injectable} from 'angular2/core';
 
+// RxJS stuff
+import 'rxjs/add/operator/map';
+
 // 3rd party libraries
 import {AuthHttp} from 'angular2-jwt/angular2-jwt';
 
@@ -16,22 +19,45 @@ export class BookService {
    */
   constructor(private _authHttp: AuthHttp) {}
 
+  // TODO: move to common service
+  private static getHeaders(): Headers {
+    let headers = new Headers();
+
+    headers.append('Content-Type', 'application/json');
+
+    return headers;
+  }
+
+  // TODO: move to common service
+  private static parseParameters(parameters: Object): string {
+    if (Object.keys(parameters).length === 0) {
+      return '';
+    } else {
+      return '?todo';
+    }
+  }
+
+  /**
+   * Getter method for book count
+   *
+   * @param params
+   * @returns {Observable<R>}
+   */
+  count({params = {}}: {params?: Object} = {}) {
+    return this._authHttp
+      .get(this.apiUrl + '/book/count' + BookService.parseParameters(params), {headers: BookService.getHeaders()})
+      .map(res => res.json());
+  }
+
   /**
    * Getter method for books data.
    *
-   * @returns {Promise|Promise<T>}
+   * @param params
+   * @returns {Observable<R>}
    */
-  getBooks() {
-    return new Promise((resolve, reject) => {
-      let headers = new Headers();
-
-      headers.append('Content-Type', 'application/json');
-
-      this._authHttp.get(this.apiUrl + '/book?populate=author', {headers: headers})
-        .subscribe(
-          data => resolve(data.json()),
-          error => reject(error)
-        );
-    });
+  getBooks({params = {}}: {params?: Object} = {}) {
+    return this._authHttp
+      .get(this.apiUrl + '/book' + BookService.parseParameters(params), {headers: BookService.getHeaders()})
+      .map(res => res.json());
   }
 }
