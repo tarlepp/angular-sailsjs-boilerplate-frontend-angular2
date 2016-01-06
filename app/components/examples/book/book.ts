@@ -44,17 +44,20 @@ import {BookService} from './service';
   // And get BookService
   let bookService = injector.get(BookService);
 
-  return Promise.all([
-    bookService.count().toPromise(),
-    bookService.getBooks().toPromise()
-  ]).then(
-    data => {
-      next.params.count = data[0];
-      next.params.books = data[1];
+  return new Promise((resolve, reject) => {
+    Promise.all([
+      bookService.count().toPromise(),
+      bookService.getBooks().toPromise()
+    ]).then(
+      data => {
+        next.params.count = data[0];
+        next.params.books = data[1];
 
-      return true;
-    }
-  );
+        resolve(true);
+      },
+      error => reject(error)
+    );
+  });
 })
 
 // Actual component class
