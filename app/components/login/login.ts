@@ -4,6 +4,9 @@ import {FormBuilder, Validators, FORM_DIRECTIVES} from 'angular2/common';
 import {Router} from 'angular2/router';
 import {Http, Headers} from 'angular2/http';
 
+// 3rd party libraries
+import {tokenNotExpired} from 'angular2-jwt/angular2-jwt';
+
 // Component setup
 @Component({
   selector: 'login',
@@ -16,6 +19,7 @@ import {Http, Headers} from 'angular2/http';
 @Injectable()
 export class LoginCmp {
   form;
+  loggedIn = tokenNotExpired();
 
   private apiUrl = '<%= BACKEND_URL %>';
 
@@ -24,6 +28,10 @@ export class LoginCmp {
     private _http: Http,
     private _router: Router
   ) {
+    if (this.loggedIn) {
+      this._router.navigate(['/Examples/Book']);
+    }
+
     this.form = fb.group({
       identifier: ['', Validators.required],
       password: ['', Validators.required]

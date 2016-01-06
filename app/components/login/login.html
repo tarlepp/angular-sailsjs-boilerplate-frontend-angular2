@@ -1,4 +1,6 @@
-<div class="form-login">
+<div class="form-login"
+    *ngIf="!loggedIn"
+>
     <form
         (ngSubmit)="onSubmit()"
         [ngFormModel]="form"
