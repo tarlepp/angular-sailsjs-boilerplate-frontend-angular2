@@ -6,12 +6,12 @@ function reportError(message: string) {
 }
 
 module.exports = function check(gulp, plugins) {
-  return function () {
+  return function() {
     let exec = require('child_process').exec;
     let semver = require('semver');
 
     exec('npm --version',
-      function (error, stdout, stderr) {
+      function(error, stdout, stderr) {
         if (error !== null) {
           reportError('npm preinstall error: ' + error + stderr);
         }
@@ -22,7 +22,7 @@ module.exports = function check(gulp, plugins) {
       });
 
     exec('node --version',
-      function (error, stdout, stderr) {
+      function(error, stdout, stderr) {
         if (error !== null) {
           reportError('npm preinstall error: ' + error + stderr);
         }

@@ -10,7 +10,7 @@ const BUNDLE_OPTS = {
 };
 
 export = function bundles(gulp, plugins) {
-  return function (done) {
+  return function(done) {
     let builder = new Builder(SYSTEM_CONFIG_BUILDER);
 
     parallel([
@@ -20,7 +20,9 @@ export = function bundles(gulp, plugins) {
     function bundleApp(done) {
       builder.bundle(
         'bootstrap - angular2/*',
-        join(BUNDLES_DEST, 'app.js'), BUNDLE_OPTS).then(done);
+        join(BUNDLES_DEST, 'app.js'),
+        BUNDLE_OPTS
+      ).then(done);
     }
   };
 };

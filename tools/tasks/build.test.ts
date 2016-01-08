@@ -3,12 +3,12 @@ import {APP_SRC, TEST_DEST} from '../config';
 import {tsProjectFn} from '../utils';
 
 export = function buildTest(gulp, plugins) {
-  return function () {
+  return function() {
     let tsProject = tsProjectFn(plugins);
     let src = [
-                join(APP_SRC, '**/*.ts'),
-                '!' + join(APP_SRC, 'bootstrap.ts')
-              ];
+      join(APP_SRC, '**/*.ts'),
+      '!' + join(APP_SRC, 'bootstrap.ts')
+    ];
 
     let result = gulp.src(src)
       .pipe(plugins.plumber())
