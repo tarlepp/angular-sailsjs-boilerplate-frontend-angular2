@@ -45,12 +45,17 @@ import {BookService} from './service';
   let bookService = injector.get(BookService);
 
   return new Promise((resolve, reject) => {
+    let parameters = {
+      limit: 20,
+      sort: 'releaseDate DESC'
+    };
+
     Promise.all([
       bookService.count().toPromise(),
-      bookService.getBooks().toPromise()
+      bookService.getBooks(parameters).toPromise()
     ]).then(
       data => {
-        next.params.count = data[0];
+        next.params.count = data[0].count;
         next.params.books = data[1];
 
         resolve(true);

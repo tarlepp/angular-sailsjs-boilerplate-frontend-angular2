@@ -33,8 +33,26 @@ export class BookService {
     if (Object.keys(parameters).length === 0) {
       return '';
     } else {
-      return '?todo';
+      return '?' + BookService.serialize(parameters);
     }
+  }
+
+  // TODO: move to common service
+  private static serialize(obj, prefix?) {
+    let str = [];
+
+    for(let p in obj) {
+
+      if (obj.hasOwnProperty(p)) {
+        let k = prefix ? prefix + '[' + p + ']' : p, v = obj[p];
+
+        str.push(typeof v === 'object'
+          ? BookService.serialize(v, k)
+          : encodeURIComponent(k) + '=' + encodeURIComponent(v));
+      }
+    }
+
+    return str.join('&');
   }
 
   /**
@@ -55,7 +73,7 @@ export class BookService {
    * @param params
    * @returns {Observable<R>}
    */
-  getBooks({params = {}}: {params?: Object} = {}) {
+  getBooks(params?: Object) {
     return this._authHttp
       .get(this.apiUrl + '/book' + BookService.parseParameters(params), {headers: BookService.getHeaders()})
       .map(res => res.json());
