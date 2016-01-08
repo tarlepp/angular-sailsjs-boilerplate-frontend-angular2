@@ -1,7 +1,6 @@
 // Angular2 specified stuff
 import {Component, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-// import {HTTP_PROVIDERS} from 'http/http';
 
 // Component specified stuff
 import {HeaderCmp, FooterCmp} from '../layout/layout';
