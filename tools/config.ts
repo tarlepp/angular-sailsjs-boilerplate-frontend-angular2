@@ -7,11 +7,10 @@ import {normalize, join} from 'path';
 export const PROJECT_ROOT         = normalize(join(__dirname, '..'));
 export const ENV                  = argv['env']         || 'dev';
 export const DEBUG                = argv['debug']       || false;
-export const PORT                 = argv['port']        || 3000;
-export const LIVE_RELOAD_PORT     = argv['reload-port'] || 3001;
+export const PORT                 = argv['port']        || 5555;
+export const LIVE_RELOAD_PORT     = argv['reload-port'] || 4002;
 export const DOCS_PORT            = argv['docs-port']   || 4003;
 export const APP_BASE             = argv['base']        || '/';
-
 export const BACKEND_URL          = argv['backend-url'] || 'http://wunder.sytes.net:1339';
 
 export const ENABLE_HOT_LOADING   = !!argv['hot-loader'];
@@ -37,7 +36,7 @@ export const LIB_DEST             = `${APP_DEST}/lib`;
 export const APP_ROOT             = ENV === 'dev' ? `${APP_BASE}${APP_DEST}/` : `${APP_BASE}`;
 export const VERSION              = appVersion();
 
-export const VERSION_NPM          = '2.14.7';
+export const VERSION_NPM          = '2.14.2';
 export const VERSION_NODE         = '4.0.0';
 
 // Declare NPM dependencies (Note that globs should not be injected).
@@ -102,6 +101,7 @@ export const SYSTEM_CONFIG_BUILDER = {
     'rxjs/*': 'node_modules/rxjs/*'
   }
 };
+
 
 // --------------
 // Private.

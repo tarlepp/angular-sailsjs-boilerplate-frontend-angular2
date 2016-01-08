@@ -12,8 +12,7 @@ export function serveSPA() {
   server.use.apply(server, codeChangeTool.middleware);
 
   server.listen(PORT, () => {
-    util.log('Server is listening on: http://localhost:' + PORT + APP_BASE + APP_DEST);
-
+    util.log('Server is listening on port: ' + PORT);
     openResource('http://localhost:' + PORT + APP_BASE + APP_DEST);
   });
 }
@@ -26,14 +25,12 @@ export function notifyLiveReload(e) {
 export function serveDocs() {
   let server = express();
 
-  server.use(
+   server.use(
     APP_BASE,
     serveStatic(resolve(process.cwd(), DOCS_DEST))
   );
 
-  server.listen(DOCS_PORT, () => {
-    util.log('Server is listening on port: ' + PORT);
-
-    openResource('http://localhost:' + DOCS_PORT + APP_BASE);
-  });
+   server.listen(DOCS_PORT, () =>
+    openResource('http://localhost:' + DOCS_PORT + APP_BASE)
+  );
 }
