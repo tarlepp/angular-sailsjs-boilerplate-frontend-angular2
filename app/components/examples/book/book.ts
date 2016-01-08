@@ -1,7 +1,7 @@
 // Angular2 specified stuff
 import {Component, Injector, provide} from 'angular2/core';
 import {HTTP_PROVIDERS} from 'angular2/http';
-import {ComponentInstruction, CanActivate, OnActivate} from 'angular2/router';
+import {CanActivate, RouteData} from 'angular2/router';
 
 // RxJS stuff
 import 'rxjs/add/operator/toPromise';
@@ -55,8 +55,10 @@ import {BookService} from './service';
       bookService.getBooks(parameters).toPromise()
     ]).then(
       data => {
-        next.params.count = data[0].count;
-        next.params.books = data[1];
+        next.routeData.data = {
+          count: data[0].count,
+          books: data[1]
+        };
 
         resolve(true);
       },
@@ -66,21 +68,12 @@ import {BookService} from './service';
 })
 
 // Actual component class
-export class BookCmp implements OnActivate {
+export class BookCmp {
   count: number;
   books: any[];
 
-  /**
-   * Function to run when router has been activated and first books are fetched from server.
-   *
-   * @param nextInstruction
-   * @param prevInstruction
-   */
-  routerOnActivate(nextInstruction: ComponentInstruction, prevInstruction: ComponentInstruction) {
-    //noinspection TypeScriptUnresolvedVariable
-    this.count = nextInstruction.params.count;
-
-    //noinspection TypeScriptUnresolvedVariable
-    this.books = nextInstruction.params.books;
+  constructor(routeData: RouteData) {
+    this.count = routeData.get('count');
+    this.books = routeData.get('books');
   }
 }
