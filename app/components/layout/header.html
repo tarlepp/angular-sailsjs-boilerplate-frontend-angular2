@@ -11,7 +11,7 @@
             </div>
 
             <ul class="nav navbar-nav">
-                <li [ngClass]="isActive('/about') ? 'active' : 'not-active'">
+                <li [ngClass]="(isActive('/about') || isRoot()) ? 'active' : 'not-active'">
                     <a [routerLink]="['/About']">About</a>
                 </li>
 

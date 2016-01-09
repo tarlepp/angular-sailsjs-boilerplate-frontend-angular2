@@ -33,6 +33,15 @@ export class HeaderCmp {
   }
 
   /**
+   * Function to check if current URL is "root" or not.
+   *
+   * @returns {boolean}
+   */
+  isRoot(): boolean {
+    return this._location.path().length === 0;
+  }
+
+  /**
    * Function to check if current user is authorized or not.
    *
    * @returns {boolean}
