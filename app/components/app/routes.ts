@@ -5,7 +5,7 @@ import {ExamplesCmp} from '../examples/examples';
 
 export class Routes {
   static items = [
-    {path: '/', component: AboutCmp},
+    {path: '/', redirectTo: ['About']},
     {path: '/about', component: AboutCmp, name: 'About'},
     {path: '/examples/...', component: ExamplesCmp, name: 'Examples'},
     {path: '/login', component: LoginCmp, name: 'Login'}
